@@ -1,0 +1,89 @@
+
+<ng-container *ngIf="add">
+    <div class="container-sm">
+        <h3 class="text-left">Add Here</h3>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Title:
+            </label>
+            <input type="text" class="form-control" id="Title" [(ngModel)]="title3  " formControlName="title" placeholder="" name="title">
+        </div>
+        <div class="form-group">
+            <label for="Desc">Body:</label>
+            <input type="text" class="form-control" id="Desc" [(ngModel)]="body3" formControlName="body" placeholder="" name="Body">
+            
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Add</button>
+    </form>
+</div>
+</ng-container>
+<div class="container-sm">
+    
+    <input type="text"  class="form-control mt-3" id="Title" placeholder="Search by userId (ex. 1,2,3)" (input)="onChange($event)" >
+    <button *ngIf="!add" class="btn btn-primary mt-3" (click)="add=true">Add</button>
+
+</div>
+
+<div class="container-sm">
+    <h3 class="text-left"></h3>
+    <!-- <div *ngIf="Emp.length == 0; else elseBlock">Nothing to display</div> -->
+    <!-- <ng-template #elseBlock> -->
+            <div class="row">
+                <div class="col-sm-4" *ngFor  ='let item of Emp'>
+                    <div class="card my-3  ">
+                        <div class="container-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.title}}</h5>
+                                <p class="card-text">{{item.body}}</p>
+                                <button class="btn btn-primary" style="font-size: small;" data-toggle="modal"
+                                data-target="#myModal" (click)="getId(item,item.id)">Edit</button>
+                                &nbsp;
+                                <button class="btn btn-danger " style="font-size: small;" (click)="OnDelete(item.id)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+    <!-- </ng-template> -->
+</div>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form  [formGroup]='form'(ngSubmit)="OnEdit()">
+                <div class="form-group">
+                    <label for="name">Title:
+                    </label>
+                    <input type="text" class="form-control" id="Title" [(ngModel)]="title2" formControlName="title" placeholder="" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="Desc">Description:</label>
+                    <input type="text" class="form-control" id="Desc" [(ngModel)]="body2" formControlName="body" placeholder="" name="Desc">
+        
+                </div>
+              
+                <div class="modal-footer">
+                  <button type="submit"  class="btn btn-default">Done</button>
+
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
